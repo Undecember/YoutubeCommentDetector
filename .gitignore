@@ -1,6 +1,7 @@
 config.json
 client_secret.json
 token.pickle
+AuthCode.txt
 logs/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,venv,vim

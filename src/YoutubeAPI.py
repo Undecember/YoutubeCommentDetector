@@ -45,8 +45,15 @@ def GenYoutube():
 def ReAuth(signum, frame):
     logger.info('Fetching new tokens...')
     flow = InstalledAppFlow.from_client_secrets_file(
-        config['CLIENT_SECRET_FILE'], config['API_SCOPES'])
-    credentials = flow.run_local_server(port = config['LOCAL_SERVER_PORT'], open_browser = False)
+        config['CLIENT_SECRET_FILE'], config['API_SCOPES'],
+        redirect_uri = 'urn:ietf:wg:oauth:2.0:oob')
+    auth_url, _ = flow.authorization_url()
+    print('Auth URL :', auth_url)
+    while not os.path.isfile('AuthCode.txt'): continue
+    with open('AuthCode.txt', 'r') as fp: code = fp.read()
+    #os.remove('AuthCode.txt')
+    flow.fetch_token(code = code)
+    credentials = flow.credentials
     with open('token.pickle', 'wb') as fp:
         logger.info('Saving credentials...')
         pickle.dump(credentials, fp)
