@@ -9,3 +9,6 @@ service:
 	sudo sed -i 's#BIN_PATH#$(WD)#' /etc/systemd/system/YCalarm.service
 	sudo systemctl enable YCalarm
 	sudo systemctl daemon-reload
+
+localtunnel:
+	npm i -g localtunnel
