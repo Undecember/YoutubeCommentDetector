@@ -1,0 +1,13 @@
+[Unit]
+Description=Botory Service
+
+[Service]
+ExecStart=/bin/bash -c '. .venv/bin/activate;./run.sh'
+ExecStop=/bin/bash -c './stop.sh'
+WorkingDirectory=BIN_PATH
+
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+WantedBy=multi-user.target
